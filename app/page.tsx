@@ -7,6 +7,8 @@ import CameraList from "../components/CameraList";
 import { Camera } from "../types/camera";
 import CrowdControls from "../components/CrowdControls";
 import HighCrowdCameras from "../components/HighCrowdCameras";
+import DashboardPanel from "../components/DashboardPanel";
+import CameraMonitoring from "../components/CameraMonitoring";
 
 export default function Home() {
 
@@ -78,7 +80,7 @@ function increasePeople() {
   }
 
   return (
-    <main>
+    <main className="dashboard">
       <WelcomeMessage />
       <p>{getDensityMessage()}</p>
       {/* Header */}
@@ -138,13 +140,24 @@ function increasePeople() {
           padding: "20px",
         }}
       >
+        <div className="stats-grid">
         <StatCard title="People" value={peopleCount} unit="persons" />
+        <StatCard title="Density" value={density} />
+        <StatCard title="Cameras" value={cameraCount} unit="active" />
+        </div>
 
-<StatCard title="Density" value={density} />
+        <div className="content-grid">
 
+  <DashboardPanel title="Crowd Overview">
+    <p>Real-time crowd monitoring will appear here.</p>
+  </DashboardPanel>
 
+  <DashboardPanel title="Alerts">
+    <p>No active alerts.</p>
+  </DashboardPanel>
 
-<StatCard title="Cameras" value={cameraCount} unit="active" />
+</div>
+<CameraMonitoring cameras={cameras} />
 
         {/* People Card */}
        <CrowdControls
